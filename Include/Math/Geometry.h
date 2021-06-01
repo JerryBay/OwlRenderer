@@ -3,7 +3,7 @@
 #include <math.h>
 #include <iostream>
 
-namespace geometry
+namespace Math
 {
     
 } // namespace name
