@@ -13,18 +13,12 @@ namespace Math
 
         Vec()=default;
 
-        Vec(int count,...)
+        Vec(double paras[Dimen])
         {
-            va_list list;
-            va_start(list,count);
-            int i=0;
-
             for (int i = 0; i < Dimen; i++)
             {           
-                data[i]=va_arg(list,double);
+                data[i]=paras[i];
             }
-
-            va_end(list);
         }
 
         double operator[](const int i) const
