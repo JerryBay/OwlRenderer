@@ -1,24 +1,31 @@
 #include <iostream>
-#include "../Include/Core.h"
+#include "../Source/Core.h"
 using namespace std;
 using namespace Math;
 
-template<typename... Types>
-int add(Types... t)
+
+static double SumOfFloat(int count, ...)
 {
-	return (...+t);
+	va_list ap;
+	double sum{ 0.f };
+	va_start(ap, count);
+ 
+	for (int i = 0; i < count; ++i) {
+		sum += va_arg(ap, double);
+	}
+ 
+	va_end(ap);
+ 
+	return sum;
 }
 
-
-template<typename T, typename... Ts>
-void syszuxPrint(T arg1, Ts... arg_left){
-    std::cout<<arg1<<", ";
-    syszuxPrint(arg_left...);
+template<typename... Type>
+void print(Type... args)
+{
+    (...,(std::cout << args << std::endl));
 }
 
-int main(int argc, char** argv)
+int main(int argc,const char** argv)
 {
-	double paras[3]={1.0f,2.0f,3.0f};
-	Vector3 v(paras);
-	cout<<v;
+	print(1,2,3,4,5);
 }

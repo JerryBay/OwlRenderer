@@ -28,7 +28,7 @@ namespace Math
         }
     };
 
-
+    //dot
     template<int Dimen>
     double operator*(const Vec<Dimen>& lvec,const Vec<Dimen>& rvec)
     {
@@ -42,6 +42,7 @@ namespace Math
         return res;
     }
 
+    //Vec*double
     template<int Dimen>
     Vec<Dimen> operator*(const Vec<Dimen>& vec,double value)
     {
@@ -55,6 +56,7 @@ namespace Math
         return res;
     }
 
+    //double*Vec
     template<int Dimen>
     Vec<Dimen> operator*(double value,const Vec<Dimen>& vec)
     {
