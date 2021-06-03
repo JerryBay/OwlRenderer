@@ -19,13 +19,28 @@ static double SumOfFloat(int count, ...)
 	return sum;
 }
 
-template<typename... Type>
-void print(Type... args)
-{
-    (...,(std::cout << args << std::endl));
+template<int n> struct vec {
+    vec() = default;
+    double & operator[](const int i)       { assert(i>=0 && i<n); return data[i]; }
+    double   operator[](const int i) const { assert(i>=0 && i<n); return data[i]; }
+    double norm2() const { return (*this)*(*this) ; }
+    double norm()  const { return std::sqrt(norm2()); }
+    double data[n] = {0};
+};
+
+template<int n> vec<n> operator*(const double& rhs, const vec<n> &lhs) {
+    vec<n> ret = lhs;
+    for (int i=n; i--; ret[i]*=rhs);
+    return ret;
 }
 
 int main(int argc,const char** argv)
 {
-	print(1,2,3,4,5);
+
+	double nums[4]={1,2,3,4};
+	Vector3 v3(nums);
+	Vector3 v31(nums+1);
+	Vector2 v2(nums);
+	Vector2 v21(nums+1);
+	cout<<Cross(v2,v21)<<endl;
 }
