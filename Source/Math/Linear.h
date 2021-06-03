@@ -23,16 +23,16 @@ namespace Math
             }
         }
 
-        double operator[](const int i) const
+        double operator[](const int idx) const
         {
-            assert(i>=0&&i<Dimen);
-            return data[i];
+            assert(idx>=0&&idx<Dimen);
+            return data[idx];
         }
 
-        double& operator[](const int i)
+        double& operator[](const int idx)
         {
-            assert(i>=0&&i<Dimen);
-            return data[i];
+            assert(idx>=0&&idx<Dimen);
+            return data[idx];
         }
 
         double Norm2()
@@ -259,6 +259,39 @@ namespace Math
 
         Mat()=default;
 
-        
-    }
+        Vec<Col>& operator[](const int idx)
+        {
+            assert(idx>=0&&idx<Row);
+            return rows[idx];
+        }
+
+        const Vec<Col>& operator[](const int idx) const
+        {
+            assert(idx>=0&&idx<Row);
+            return rows[idx];
+        }
+
+        Vec<Row> Col(const int idx) const
+        {
+            assert(idx>=0&&idx<Col);
+            Vec<Row> res;
+
+            for (int i = 0; i < Row; i++)
+            {
+                res[i]=rows[i][idx];
+            }
+            
+            return res;
+        }
+
+        void SetCol(const int idx,const Vec<rows>& vec)
+        {
+            assert(idx>=0&&idx<Col);
+            
+            for (int i = 0; i < Row; i++)
+            {
+                rows[i][idx]=vec[i];
+            }           
+        }
+    };
 } // namespace Math
