@@ -180,6 +180,19 @@ namespace Math
         return lvec;
     }
 
+    template<int Dimen>
+    std::ostream& operator<<(std::ostream& out,const Vec<Dimen>& vec)
+    {
+        for (int i = 0; i < Dimen; i++)
+        {
+            out<<vec[i]<<" ";
+        }
+
+        out<<std::endl;
+
+        return out;
+    }  
+
     template<int Dimen1,int Dimen2>
     Vec<Dimen1> Embed(const Vec<Dimen2>& vec,double fill=1.0f)
     {
@@ -218,19 +231,6 @@ namespace Math
         
         return res;
     }
-
-    template<int Dimen>
-    std::ostream& operator<<(std::ostream& out,const Vec<Dimen>& vec)
-    {
-        for (int i = 0; i < Dimen; i++)
-        {
-            out<<vec[i]<<" ";
-        }
-
-        out<<std::endl;
-
-        return out;
-    }  
 
     typedef Vec<2> Vector2;
     typedef Vec<3> Vector3;
@@ -271,7 +271,7 @@ namespace Math
             return rows[idx];
         }
 
-        Vec<Row> Col(const int idx) const
+        Vec<Row> Column(const int idx) const
         {
             assert(idx>=0&&idx<Col);
             Vec<Row> res;
@@ -284,7 +284,7 @@ namespace Math
             return res;
         }
 
-        void SetCol(const int idx,const Vec<rows>& vec)
+        void SetColumn(const int idx,const Vec<Row>& vec)
         {
             assert(idx>=0&&idx<Col);
             
@@ -293,5 +293,31 @@ namespace Math
                 rows[i][idx]=vec[i];
             }           
         }
+
+        static Mat<Row,Col> Identity()
+        {
+            Mat<Row,Col> res;
+
+            for (int i = 0; i < Row; i++)
+            {
+                for (int j = 0; j < Col; j++)
+                {
+                    res[i][j]=(i==j);
+                }               
+            }
+            
+            return res;
+        }
     };
+
+    template<int Row,int Col>
+    std::ostream& operator<<(std::ostream& out,const Mat<Row,Col>& mat)
+    {
+        for (int i = 0; i < Row; i++)
+        {
+            out<<mat[i];
+        }
+        
+        return out;
+    }
 } // namespace Math
