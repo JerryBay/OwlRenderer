@@ -252,72 +252,98 @@ namespace Math
 
 
     //Matrix
-    template<int Row,int Col>
+    template <int Row, int Col>
     struct Mat
     {
-        Vec<Col> rows[Row]={{}};
+        Vec<Col> rows[Row] = {{}};
 
-        Mat()=default;
+        Mat() = default;
 
-        Vec<Col>& operator[](const int idx)
+        Vec<Col> &operator[](const int idx)
         {
-            assert(idx>=0&&idx<Row);
+            assert(idx >= 0 && idx < Row);
             return rows[idx];
         }
 
-        const Vec<Col>& operator[](const int idx) const
+        const Vec<Col> &operator[](const int idx) const
         {
-            assert(idx>=0&&idx<Row);
+            assert(idx >= 0 && idx < Row);
             return rows[idx];
         }
 
         Vec<Row> Column(const int idx) const
         {
-            assert(idx>=0&&idx<Col);
+            assert(idx >= 0 && idx < Col);
             Vec<Row> res;
 
             for (int i = 0; i < Row; i++)
             {
-                res[i]=rows[i][idx];
+                res[i] = rows[i][idx];
             }
-            
+
             return res;
         }
 
-        void SetColumn(const int idx,const Vec<Row>& vec)
+        void SetColumn(const int idx, const Vec<Row> &vec)
         {
-            assert(idx>=0&&idx<Col);
-            
+            assert(idx >= 0 && idx < Col);
+
             for (int i = 0; i < Row; i++)
             {
-                rows[i][idx]=vec[i];
-            }           
+                rows[i][idx] = vec[i];
+            }
         }
 
-        static Mat<Row,Col> Identity()
+        static Mat<Row, Col> Identity()
         {
-            Mat<Row,Col> res;
+            Mat<Row, Col> res;
 
             for (int i = 0; i < Row; i++)
             {
                 for (int j = 0; j < Col; j++)
                 {
-                    res[i][j]=(i==j);
-                }               
+                    res[i][j] = (i == j);
+                }
             }
-            
+
             return res;
         }
     };
 
-    template<int Row,int Col>
-    std::ostream& operator<<(std::ostream& out,const Mat<Row,Col>& mat)
+    template <int Row, int Col>
+    std::ostream &operator<<(std::ostream &out, const Mat<Row, Col> &mat)
     {
         for (int i = 0; i < Row; i++)
         {
-            out<<mat[i];
+            out << mat[i];
         }
-        
+
         return out;
+    }
+
+    template <int Row, int Col>
+    Mat<Row, Col> operator+(const Mat<Row, Col> &lmat, const Mat<Row, Col> &rmat)
+    {
+        Mat<Row, Col> res;
+
+        for (int i = 0; i < Row; i++)
+        {
+            res[i] = lmat[i] + rmat[i];
+        }
+
+        return res;
+    }
+
+    template <int Row, int Col>
+    Mat<Row, Col> operator-(const Mat<Row, Col> &lmat, const Mat<Row, Col> &rmat)
+    {
+        Mat<Row, Col> res;
+
+        for (int i = 0; i < Row; i++)
+        {
+            res[i] = lmat[i] - rmat[i];
+        }
+
+        return res;
     }
 } // namespace Math
