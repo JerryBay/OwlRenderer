@@ -1,2 +1,3 @@
-#include "Math/Linear.h"
+#include "Math/Vec.h"
+#include "Math/Mat.h"
 #include "Math/Geometry.h"
