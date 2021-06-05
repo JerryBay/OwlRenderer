@@ -48,8 +48,24 @@ namespace Math
             }
         }
 
-        Mat<Row, Col> adjugate() const
+        Mat<Row-1,Col-1> GetMinor(const int row,const int col) const
         {
+            Mat<Row-1,Col-1> res;
+
+            for (int i = 0; i < row-1; i++)
+            {
+                for (int j = 0; j < col-1; j++)
+                {
+                    res[i][j]=rows[i<row?i:i+1][j<col?j:j+1];
+                }               
+            }
+            
+            return res;
+        }
+
+        Mat<Row, Col> Adjugate() const
+        {
+
         }
 
         static Mat<Row, Col> Identity()
