@@ -1,10 +1,5 @@
 #pragma once
 
-#include <assert.h>
-#include <stdarg.h>
-#include <math.h>
-#include <iostream>
-
 namespace Math
 {
     //Vector
