@@ -240,7 +240,7 @@ namespace Math
     {
         return lvec[0]*rvec[1]-lvec[1]*rvec[0];
     }
-  
+    
     Vector3 Cross(const Vector3& lvec,const Vector3& rvec)
     {
         Vector3 res;
@@ -249,6 +249,4 @@ namespace Math
         res[2]=lvec[0]*rvec[1]-lvec[1]*rvec[0];
         return res;
     }
-
-
 } // namespace Math

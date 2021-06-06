@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Vec.h"
-
 //Matrix
 
 namespace Math
@@ -157,6 +155,17 @@ namespace Math
     }
 
     template <int RowDimen, int ColDimen>
+    Mat<RowDimen, ColDimen> operator+=(Mat<RowDimen, ColDimen> &lmat, const Mat<RowDimen, ColDimen> &rmat)
+    {
+        for (int i = 0; i < RowDimen; i++)
+        {
+            lmat[i] += rmat[i];
+        }
+
+        return lmat;
+    }
+
+    template <int RowDimen, int ColDimen>
     Mat<RowDimen, ColDimen> operator-(const Mat<RowDimen, ColDimen> &lmat, const Mat<RowDimen, ColDimen> &rmat)
     {
         Mat<RowDimen, ColDimen> res;
@@ -167,6 +176,17 @@ namespace Math
         }
 
         return res;
+    }
+
+    template <int RowDimen, int ColDimen>
+    Mat<RowDimen, ColDimen> operator-=(Mat<RowDimen, ColDimen> &lmat, const Mat<RowDimen, ColDimen> &rmat)
+    {
+        for (int i = 0; i < RowDimen; i++)
+        {
+            lmat[i] -= rmat[i];
+        }
+
+        return lmat;
     }
 
     template <int RowDimen,int ColDimen>
@@ -182,12 +202,36 @@ namespace Math
         return res;
     }
 
-        template <int RowDimen,int ColDimen>
+    template <int RowDimen,int ColDimen>
     Mat<RowDimen,ColDimen>& operator*=(Mat<RowDimen,ColDimen>& mat,double value)
     {
         for (int i = 0; i < RowDimen; i++)
         {
             mat[i]*=value;
+        }
+        
+        return mat;
+    }
+
+    template <int RowDimen,int ColDimen>
+    Mat<RowDimen,ColDimen> operator/(const Mat<RowDimen,ColDimen>& mat,double value)
+    {
+        Mat<RowDimen,ColDimen> res;
+
+        for (int i = 0; i < RowDimen; i++)
+        {
+            res[i]=mat[i]/value;
+        }
+        
+        return res;
+    }
+
+    template <int RowDimen,int ColDimen>
+    Mat<RowDimen,ColDimen>& operator/=(Mat<RowDimen,ColDimen>& mat,double value)
+    {
+        for (int i = 0; i < RowDimen; i++)
+        {
+            mat[i]/=value;
         }
         
         return mat;

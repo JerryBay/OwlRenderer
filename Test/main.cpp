@@ -47,6 +47,6 @@ int main(int argc,const char** argv)
 	m[0]=v3;
 	m[1]=v31;
 
-	cout<<(m*=3);
+	cout<<(m+=m);
 	//system("pause");
 }
