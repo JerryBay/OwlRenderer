@@ -45,6 +45,7 @@ int main(int argc,const char** argv)
 	// cout<<v3[3]<<endl;
 
 	Mat<3,3> m=Mat<3,3>::Identity();
-	Mat<2,2> t=m.GetMinor(0,0);
+	Mat<2,2> t=m.GetMinor(1,0);
 	cout<<t;
+	//system("pause");
 }

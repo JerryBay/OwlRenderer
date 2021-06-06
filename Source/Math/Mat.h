@@ -6,31 +6,31 @@
 
 namespace Math
 {
-    template <int Row, int Col>
+    template <int RowDimen, int ColDimen>
     struct Mat
     {
-        Vec<Col> rows[Row] = {{}};
+        Vec<ColDimen> rows[RowDimen] = {{}};
 
         Mat() = default;
 
-        Vec<Col> &operator[](const int idx)
+        Vec<ColDimen> &operator[](const int idx)
         {
-            assert(idx >= 0 && idx < Row);
+            assert(idx >= 0 && idx < RowDimen);
             return rows[idx];
         }
 
-        const Vec<Col> &operator[](const int idx) const
+        const Vec<ColDimen> &operator[](const int idx) const
         {
-            assert(idx >= 0 && idx < Row);
+            assert(idx >= 0 && idx < RowDimen);
             return rows[idx];
         }
 
-        Vec<Row> Column(const int idx) const
+        Vec<RowDimen> Column(const int idx) const
         {
-            assert(idx >= 0 && idx < Col);
-            Vec<Row> res;
+            assert(idx >= 0 && idx < ColDimen);
+            Vec<RowDimen> res;
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowDimen; i++)
             {
                 res[i] = rows[i][idx];
             }
@@ -38,23 +38,23 @@ namespace Math
             return res;
         }
 
-        void SetColumn(const int idx, const Vec<Row> &vec)
+        void SetColumn(const int idx, const Vec<RowDimen> &vec)
         {
-            assert(idx >= 0 && idx < Col);
+            assert(idx >= 0 && idx < ColDimen);
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowDimen; i++)
             {
                 rows[i][idx] = vec[i];
             }
         }
 
-        Mat<Row-1,Col-1> GetMinor(const int row,const int col) const
+        Mat<RowDimen-1,ColDimen-1> GetMinor(const int row,const int col) const
         {
-            Mat<Row-1,Col-1> res;
+            Mat<RowDimen-1,ColDimen-1> res;
 
-            for (int i = 0; i < row-1; i++)
+            for (int i = 0; i <RowDimen-1; i++)
             {
-                for (int j = 0; j < col-1; j++)
+                for (int j = 0; j < ColDimen-1; j++)
                 {
                     res[i][j]=rows[i<row?i:i+1][j<col?j:j+1];
                 }               
@@ -63,18 +63,18 @@ namespace Math
             return res;
         }
 
-        Mat<Row, Col> Adjugate() const
+        Mat<RowDimen, ColDimen> Adjugate() const
         {
 
         }
 
-        static Mat<Row, Col> Identity()
+        static Mat<RowDimen, ColDimen> Identity()
         {
-            Mat<Row, Col> res;
+            Mat<RowDimen, ColDimen> res;
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowDimen; i++)
             {
-                for (int j = 0; j < Col; j++)
+                for (int j = 0; j < ColDimen; j++)
                 {
                     res[i][j] = (i == j);
                 }
@@ -84,10 +84,10 @@ namespace Math
         }
     };
 
-    template <int Row, int Col>
-    std::ostream &operator<<(std::ostream &out, const Mat<Row, Col> &mat)
+    template <int RowDimen, int ColDimen>
+    std::ostream &operator<<(std::ostream &out, const Mat<RowDimen, ColDimen> &mat)
     {
-        for (int i = 0; i < Row; i++)
+        for (int i = 0; i < RowDimen; i++)
         {
             out << mat[i];
         }
@@ -95,12 +95,12 @@ namespace Math
         return out;
     }
 
-    template <int Row, int Col>
-    Mat<Row, Col> operator+(const Mat<Row, Col> &lmat, const Mat<Row, Col> &rmat)
+    template <int RowDimen, int ColDimen>
+    Mat<RowDimen, ColDimen> operator+(const Mat<RowDimen, ColDimen> &lmat, const Mat<RowDimen, ColDimen> &rmat)
     {
-        Mat<Row, Col> res;
+        Mat<RowDimen, ColDimen> res;
 
-        for (int i = 0; i < Row; i++)
+        for (int i = 0; i < RowDimen; i++)
         {
             res[i] = lmat[i] + rmat[i];
         }
@@ -108,12 +108,12 @@ namespace Math
         return res;
     }
 
-    template <int Row, int Col>
-    Mat<Row, Col> operator-(const Mat<Row, Col> &lmat, const Mat<Row, Col> &rmat)
+    template <int RowDimen, int ColDimen>
+    Mat<RowDimen, ColDimen> operator-(const Mat<RowDimen, ColDimen> &lmat, const Mat<RowDimen, ColDimen> &rmat)
     {
-        Mat<Row, Col> res;
+        Mat<RowDimen, ColDimen> res;
 
-        for (int i = 0; i < Row; i++)
+        for (int i = 0; i < RowDimen; i++)
         {
             res[i] = lmat[i] - rmat[i];
         }
