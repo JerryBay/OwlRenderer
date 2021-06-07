@@ -1,12 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-#include "../Math/Math.h"
-#include "../ImageProject/Image.h"
+#include "Model.h"
 
 namespace Model
 {
@@ -17,7 +11,7 @@ namespace Model
         int nrmidx[3];
     };
 
-    class ObjModel
+    class ObjModel:public Model
     {
     private:
         std::vector<Math::Vector3> _positions;
@@ -28,7 +22,7 @@ namespace Model
     public:
         ObjModel();
         ObjModel(const std::string filename);
-        void LoadObjMode(const std::string filename);
+        virtual void LoadModel(const std::string filename);
         int PosCount() const;
         int UVCount() const;
         int NmrCount() const;

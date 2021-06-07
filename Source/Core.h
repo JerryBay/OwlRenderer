@@ -1,4 +1,4 @@
 #include "Math/Math.h"
-#include "ImageProject/Image.h"
-#include "ModelProject/Model.h"
+#include "ImageProcessor/ImageProcessor.h"
+#include "ModelProcessor/ModelProcessor.h"
 #include "Renderer/Rasterize.h"

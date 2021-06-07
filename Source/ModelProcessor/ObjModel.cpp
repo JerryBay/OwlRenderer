@@ -9,10 +9,10 @@ namespace Model
 
     ObjModel::ObjModel(const std::string filename)
     {
-        LoadObjMode(filename);
+        LoadModel(filename);
     }
 
-    void ObjModel::LoadObjMode(const std::string filename)
+    void ObjModel::LoadModel(const std::string filename)
     {
         std::ifstream in;
         in.open(filename,std::ifstream::in);

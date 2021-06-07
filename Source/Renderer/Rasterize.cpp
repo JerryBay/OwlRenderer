@@ -13,33 +13,53 @@ namespace Renderer
 
     }
 
-    int Rasterize::GetIdx(const Math::Vector2& point) const
+    int Rasterize::GetIdx(const int x,const int y) const
     {
-        return point[1]*_width+point[0];
+        return y*_width+x;
         //return (_width-y-1)*y+x;
     }
 
-    void Rasterize::SetColor(const Math::Vector2& point,const Math::Vector4& color)
+    void Rasterize::SetColor(const int x,const int y,const Math::Vector4& color)
     {
-        int idx=GetIdx(point);
+        int idx=GetIdx(x,y);
         _frameBuffer[idx]=color;
     }
 
-    void Rasterize::SetDepth(const Math::Vector2& point,const double depth)
+    void Rasterize::SetDepth(const int x,const int y,const double depth)
     {
-        int idx=GetIdx(point);
+        int idx=GetIdx(x,y);
         _depthBuffer[idx]=depth; 
     }
 
-    Math::Vector4 Rasterize::GetColor(const Math::Vector2& point) const
+    Math::Vector4 Rasterize::GetColor(const int x,const int y) const
     {
-        int idx=GetIdx(point);
+        int idx=GetIdx(x,y);
         return _frameBuffer[idx];     
     }
 
-    double Rasterize::GetDepth(const Math::Vector2& point) const
+    double Rasterize::GetDepth(const int x,const int y) const
     {
-        int idx=GetIdx(point);
+        int idx=GetIdx(x,y);
         return _depthBuffer[idx];             
     } 
+
+    void Rasterize::SetModel(const Math::Matrix4& model)
+    {
+        _model=model;
+    }
+
+    void Rasterize::SetView(const Math::Matrix4& view)
+    {
+        _view=view;
+    }
+
+    void Rasterize::SetProjection(const Math::Matrix4& projection)
+    {
+        _projection=projection;
+    }
+
+    void Rasterize::DrawTriangles()
+    {
+        
+    }
 } // namespace Renderer

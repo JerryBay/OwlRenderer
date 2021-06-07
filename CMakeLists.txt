@@ -16,6 +16,6 @@ aux_source_directory(./Test Test)
 
 aux_source_directory(./Source/Math Math)
 
-aux_source_directory(./Source/ModelProject Model)
+aux_source_directory(./Source/ModelProcessor Model)
 
 add_executable(${PROJECT_NAME} ${Test} ${Math} ${Model})
