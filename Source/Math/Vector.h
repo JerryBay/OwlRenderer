@@ -235,6 +235,8 @@ namespace Math
     typedef Vec<3> Vector3;
     typedef Vec<4> Vector4;
 
+    typedef Vec<4> Color;
+
     double Cross(const Vector2& lvec,const Vector2& rvec);
     
     Vector3 Cross(const Vector3& lvec,const Vector3& rvec);
