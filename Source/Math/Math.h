@@ -1,8 +1,4 @@
 #pragma once
 
-#include <assert.h>
-#include <stdarg.h>
-#include <math.h>
-#include <iostream>
-#include "Vec.h"
-#include "Mat.h"
+#include "Vector.h"
+#include "Matrix.h"

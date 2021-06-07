@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector.h"
+
 //Matrix
 
 namespace Math

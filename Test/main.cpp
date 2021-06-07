@@ -4,36 +4,6 @@ using namespace std;
 using namespace Math;
 
 
-static double SumOfFloat(int count, ...)
-{
-	va_list ap;
-	double sum{ 0.f };
-	va_start(ap, count);
- 
-	for (int i = 0; i < count; ++i) {
-		sum += va_arg(ap, double);
-	}
- 
-	va_end(ap);
- 
-	return sum;
-}
-
-template<int n> struct vec {
-    vec() = default;
-    double & operator[](const int i)       { assert(i>=0 && i<n); return data[i]; }
-    double   operator[](const int i) const { assert(i>=0 && i<n); return data[i]; }
-    double norm2() const { return (*this)*(*this) ; }
-    double norm()  const { return std::sqrt(norm2()); }
-    double data[n] = {0};
-};
-
-template<int n> vec<n> operator*(const double& rhs, const vec<n> &lhs) {
-    vec<n> ret = lhs;
-    for (int i=n; i--; ret[i]*=rhs);
-    return ret;
-}
-
 int main(int argc,const char** argv)
 {
 
