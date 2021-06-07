@@ -19,7 +19,7 @@ namespace Model
 
         if (in.fail())
         {
-            std::cerr<<"load Obj file failed!";
+            std::cerr<<"load Obj file failed!"<<std::endl;
             return;
         }
         
@@ -69,6 +69,13 @@ namespace Model
                 int count=0;
                 while (iss>>p>>trash>>t>>trash>>n)
                 {
+                    if (count>=3)
+                    {
+                        std::cerr<<"Error: the obj file is supposed to be triangulated" << std::endl;
+                        in.close();
+                        return;
+                    }
+                    
                     tri.posidx[count]=p--;
                     tri.uvidx[count]=t--;
                     tri.nrmidx[count]=n--;
@@ -79,10 +86,29 @@ namespace Model
                     in.close();
                     return;
                 }
-                facets.push_back(tri);
-            }
-
-            in.close();            
+                _facets.push_back(tri);
+            }     
         }        
+        in.close();       
+    }
+
+    int ObjModel::PosCount() const
+    {
+        return _positions.size();
+    }
+
+    int ObjModel::UVCount() const
+    {
+        return _texcoords.size();
+    }
+
+    int ObjModel::NmrCount() const
+    {
+        return _normals.size();
+    }
+
+    int ObjModel::TriCount() const
+    {
+        return _facets.size();
     }
 } // namespace Model

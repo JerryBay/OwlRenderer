@@ -12,8 +12,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
-aux_source_directory(./Test SOURCES)
+aux_source_directory(./Test Test)
 
+aux_source_directory(./Source/Math Math)
 
+aux_source_directory(./Source/ModelProject Model)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${Test} ${Math} ${Model})
