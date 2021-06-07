@@ -20,9 +20,9 @@ namespace Model
     class ObjModel
     {
     private:
-        std::vector<Math::Vector3> positions;
-        std::vector<Math::Vector2> texcoords;
-        std::vector<Math::Vector3> normals;
+        std::vector<Math::Vector3> _positions;
+        std::vector<Math::Vector2> _texcoords;
+        std::vector<Math::Vector3> _normals;
 
         std::vector<TriangleIndex> facets;
     public:

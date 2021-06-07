@@ -39,17 +39,7 @@ namespace Model
                 {
                     iss>>pos[i];
                 }
-                positions.push_back(pos);
-            }
-            else if (!line.compare(0,3,"vn "))
-            {
-                iss>>trash>>trash;
-                Math::Vector3 normal;
-                for (int i = 0; i < 3; i++)
-                {
-                    iss>>normal[i];
-                }
-                normals.push_back(normal);
+                _positions.push_back(pos);
             }
             else if (!line.compare(0,3,"vt "))
             {
@@ -59,15 +49,40 @@ namespace Model
                 {
                     iss>>uv[i];
                 }
-                texcoords.push_back(uv);
+                _texcoords.push_back(uv);
+            }
+            else if (!line.compare(0,3,"vn "))
+            {
+                iss>>trash>>trash;
+                Math::Vector3 normal;
+                for (int i = 0; i < 3; i++)
+                {
+                    iss>>normal[i];
+                }
+                _normals.push_back(normal);
             }
             else if (!line.compare(0,2,"f "))
             {
-                
+                iss>>trash;
+                int p,t,n;
+                TriangleIndex tri;
+                int count=0;
+                while (iss>>p>>trash>>t>>trash>>n)
+                {
+                    tri.posidx[count]=p--;
+                    tri.uvidx[count]=t--;
+                    tri.nrmidx[count]=n--;
+                    count++;
+                }
+                if (3!=count) {
+                    std::cerr << "Error: the obj file is supposed to be triangulated" << std::endl;
+                    in.close();
+                    return;
+                }
+                facets.push_back(tri);
             }
-            
-            
-        }
-        
+
+            in.close();            
+        }        
     }
 } // namespace Model
