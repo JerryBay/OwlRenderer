@@ -302,4 +302,7 @@ namespace Math
         }
     };
     
+    typedef Mat<2,2> Matrix2;
+    typedef Mat<3,3> Matrix3;
+    typedef Mat<4,4> Matrix4;
 } // namespace Math

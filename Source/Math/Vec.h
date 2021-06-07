@@ -10,13 +10,13 @@ namespace Math
 
         Vec()=default;
 
-        Vec(double paras[Dimen])
-        {
-            for (int i = 0; i < Dimen; i++)
-            {           
-                data[i]=paras[i];
-            }
-        }
+        // Vec(double paras[Dimen])
+        // {
+        //     for (int i = 0; i < Dimen; i++)
+        //     {           
+        //         data[i]=paras[i];
+        //     }
+        // }
 
         double operator[](const int idx) const
         {
