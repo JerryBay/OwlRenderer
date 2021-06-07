@@ -237,7 +237,17 @@ namespace Math
 
     typedef Vec<4> Color;
 
-    double Cross(const Vector2& lvec,const Vector2& rvec);
-    
-    Vector3 Cross(const Vector3& lvec,const Vector3& rvec);
+    inline double Cross(const Vector2& lvec,const Vector2& rvec)
+    {
+        return lvec[0]*rvec[1]-lvec[1]*rvec[0];
+    }
+
+    inline Vector3 Cross(const Vector3& lvec,const Vector3& rvec)
+    {
+        Vector3 res;
+        res[0]=lvec[1]*rvec[2]-lvec[2]*rvec[1];
+        res[1]=lvec[2]*rvec[0]-lvec[0]*rvec[2];
+        res[2]=lvec[0]*rvec[1]-lvec[1]*rvec[0];
+        return res;
+    }
 } // namespace Math

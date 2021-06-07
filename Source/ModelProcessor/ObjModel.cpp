@@ -34,30 +34,30 @@ namespace Model
             if (!line.compare(0,2,"v "))
             {
                 iss>>trash;
-                Math::Vector3 pos;
+                auto pos=std::make_shared<Math::Vector3>();
                 for (int i = 0; i < 3; i++)
                 {
-                    iss>>pos[i];
+                    iss>>(*pos)[i];
                 }
                 _positions.push_back(pos);
             }
             else if (!line.compare(0,3,"vt "))
             {
                 iss>>trash>>trash;
-                Math::Vector2 uv;
+                auto uv=std::make_shared<Math::Vector2>();
                 for (int i = 0; i < 2; i++)
                 {
-                    iss>>uv[i];
+                    iss>>(*uv)[i];
                 }
                 _texcoords.push_back(uv);
             }
             else if (!line.compare(0,3,"vn "))
             {
                 iss>>trash>>trash;
-                Math::Vector3 normal;
+                auto normal=std::make_shared<Math::Vector3>();
                 for (int i = 0; i < 3; i++)
                 {
-                    iss>>normal[i];
+                    iss>>(*normal)[i];
                 }
                 _normals.push_back(normal);
             }
@@ -65,7 +65,8 @@ namespace Model
             {
                 iss>>trash;
                 int p,t,n;
-                TriangleIndex tri;
+                // TriangleIndex tri;
+                Triangle triangle;
                 int count=0;
                 while (iss>>p>>trash>>t>>trash>>n)
                 {
@@ -76,9 +77,11 @@ namespace Model
                         return;
                     }
                     
-                    tri.posidx[count]=p--;
-                    tri.uvidx[count]=t--;
-                    tri.nrmidx[count]=n--;
+                    // tri.posidx[count]=--p;
+                    // tri.uvidx[count]=--t;
+                    // tri.nrmidx[count]=--n;
+
+                    triangle.ver[count]=Vertex{_positions[--p],_texcoords[--t],_normals[--n]};
                     count++;
                 }
                 if (3!=count) {
@@ -86,8 +89,9 @@ namespace Model
                     in.close();
                     return;
                 }
-                _facets.push_back(tri);
-            }     
+                //_facets.push_back(tri);
+                _triangles.push_back(triangle);
+            }
         }        
         in.close();       
     }
@@ -109,6 +113,6 @@ namespace Model
 
     int ObjModel::TriCount() const
     {
-        return _facets.size();
+        return _triangles.size();
     }
 } // namespace Model

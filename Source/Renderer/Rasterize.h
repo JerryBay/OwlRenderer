@@ -2,6 +2,8 @@
 
 #include <vector>
 #include "../Math/Math.h"
+#include "../ModelProcessor/ModelProcessor.h"
+#include "../Shader/Shader.h"
 
 namespace Renderer
 {
@@ -26,6 +28,6 @@ namespace Renderer
         void SetModel(const Math::Matrix4& model);
         void SetView(const Math::Matrix4& view);
         void SetProjection(const Math::Matrix4& projection); 
-        void DrawTriangles();
+        void DrawTriangles(Model::BaseModel* model,Shader::BaseShader* shader);
     };
 } // namespace Rasterize

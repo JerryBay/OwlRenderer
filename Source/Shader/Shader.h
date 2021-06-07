@@ -1,12 +1,3 @@
 #pragma once
 
-namespace Shader
-{
-    class Shader
-    {
-    private:
-        
-    public:
-
-    };
-} // namespace Shader
+#include "BaseShader.h"

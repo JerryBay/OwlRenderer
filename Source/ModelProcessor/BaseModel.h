@@ -25,10 +25,10 @@ namespace Model
         Vertex ver[3];
     };
 
-    class Model
+    class BaseModel
     {
     protected:
-        std::vector<Triangle> triangles;
+        std::vector<Triangle> _triangles;
     public:
         virtual void LoadModel(const std::string filename)=0;
     };

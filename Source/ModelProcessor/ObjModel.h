@@ -1,24 +1,24 @@
 #pragma once
 
-#include "Model.h"
+#include "BaseModel.h"
 
 namespace Model
 {
-    struct TriangleIndex
-    {
-        int posidx[3];
-        int uvidx[3];
-        int nrmidx[3];
-    };
+    // struct TriangleIndex
+    // {
+    //     int posidx[3];
+    //     int uvidx[3];
+    //     int nrmidx[3];
+    // };
 
-    class ObjModel:public Model
+    class ObjModel:public BaseModel
     {
     private:
-        std::vector<Math::Vector3> _positions;
-        std::vector<Math::Vector2> _texcoords;
-        std::vector<Math::Vector3> _normals;
+        std::vector<std::shared_ptr<Math::Vector3>> _positions;
+        std::vector<std::shared_ptr<Math::Vector2>> _texcoords;
+        std::vector<std::shared_ptr<Math::Vector3>> _normals;
 
-        std::vector<TriangleIndex> _facets;
+        //std::vector<TriangleIndex> _facets;
     public:
         ObjModel();
         ObjModel(const std::string filename);
