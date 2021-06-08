@@ -58,8 +58,26 @@ namespace Renderer
         _projection=projection;
     }
 
-    void Rasterize::DrawTriangles(Model::BaseModel* model,Shader::BaseShader* shader)
+    Rasterize::Point Rasterize::NDC2Screen(const double x,const double y) const
     {
+        Point res;
+        res.x=(x+1)/2*_width;
+        res.y=(y+1)/2*_height;
+        return res;
+    }
+
+    void Rasterize::DrawTriangles(const Model::BaseModel* model,Shader::BaseShader* shader)
+    {
+        Math::Matrix4 mat=_projection*_view*_model;
+        std::vector<Math::Vector4> screenPoints;
+        std::vector<Model::Triangle> tris=model->GetTriangles();
+        for (int i = 0; i < tris.size(); i++)
+        {
+            Model::Triangle triangle=tris[i];
+            auto v1=mat*Math::Embed<4>(*(triangle.ver[0].position));
+            auto v2=mat*Math::Embed<4>(*(triangle.ver[1].position));
+            auto v3=mat*Math::Embed<4>(*(triangle.ver[2].position));
+        }
         
     }
 } // namespace Renderer

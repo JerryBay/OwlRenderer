@@ -32,5 +32,6 @@ namespace Model
         std::vector<Triangle> _triangles;
     public:
         virtual void LoadModel(const std::string filename)=0;
+        virtual std::vector<Triangle> GetTriangles() const=0;
     };
 } // namespace Model

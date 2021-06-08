@@ -23,6 +23,7 @@ namespace Model
         ObjModel();
         ObjModel(const std::string filename);
         virtual void LoadModel(const std::string filename);
+        virtual std::vector<Triangle> GetTriangles() const;
         int PosCount() const;
         int UVCount() const;
         int NmrCount() const;

@@ -19,7 +19,14 @@ namespace Renderer
         Math::Matrix4 _model;
         Math::Matrix4 _view;
         Math::Matrix4 _projection;
+        
     public:
+        struct Point
+        {
+            int x;
+            int y;
+        };
+
         Rasterize(const int width,const int height,Camera* camera);
         ~Rasterize();
         int GetIdx(const int x,const int y) const;
@@ -30,6 +37,7 @@ namespace Renderer
         void SetModel(const Math::Matrix4& model);
         void SetView(const Math::Matrix4& view);
         void SetProjection(const Math::Matrix4& projection);
-        void DrawTriangles(Model::BaseModel* model,Shader::BaseShader* shader);
+        Point NDC2Screen(const double x,const double y) const;
+        void DrawTriangles(const Model::BaseModel* model,Shader::BaseShader* shader);
     };
 } // namespace Rasterize

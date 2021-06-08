@@ -96,6 +96,11 @@ namespace Model
         in.close();       
     }
 
+    std::vector<Triangle> ObjModel::GetTriangles() const
+    {
+        return _triangles;
+    }
+
     int ObjModel::PosCount() const
     {
         return _positions.size();
