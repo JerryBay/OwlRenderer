@@ -58,7 +58,7 @@ namespace Renderer
         _projection=projection;
     }
 
-    void Rasterize::DrawTriangles()
+    void Rasterize::DrawTriangles(Model::BaseModel* model,Shader::BaseShader* shader)
     {
         
     }
