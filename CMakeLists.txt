@@ -14,8 +14,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 aux_source_directory(./Test Test)
 
-aux_source_directory(./Source/Math Math)
+aux_source_directory(./Source/ImageProcessor ImageProcessor)
+
+aux_source_directory(./Source/Shader Shader)
+
+aux_source_directory(./Source/Renderer Renderer)
 
 aux_source_directory(./Source/ModelProcessor Model)
 
-add_executable(${PROJECT_NAME} ${Test} ${Math} ${Model})
+add_executable(${PROJECT_NAME} ${Test} ${ImageProcessor} ${Shader} ${Renderer} ${Model})

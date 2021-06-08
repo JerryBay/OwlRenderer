@@ -2,7 +2,7 @@
 
 namespace Renderer
 {
-    Rasterize::Rasterize(const int width,const int height):_width(width),_height(height)
+    Rasterize::Rasterize(const int width,const int height,Camera* camera):_width(width),_height(height),_camera(camera)
     {
         _frameBuffer.reserve(width*height);
         _depthBuffer.reserve(width*height);
@@ -41,7 +41,7 @@ namespace Renderer
     {
         int idx=GetIdx(x,y);
         return _depthBuffer[idx];             
-    } 
+    }
 
     void Rasterize::SetModel(const Math::Matrix4& model)
     {

@@ -12,7 +12,7 @@ namespace Shader
         
     }
 
-    void SetTexture(const char* name,void* image)
+    void UnlitShader::SetTexture(const char* name,void* image)
     {
 
     }
