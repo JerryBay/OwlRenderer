@@ -58,7 +58,7 @@ namespace Renderer
         _projection=projection;
     }
 
-    Rasterize::Point Rasterize::NDC2Screen(const double x,const double y) const
+    Point Rasterize::NDC2Screen(const double x,const double y) const
     {
         Point res;
         res.x=(x+1)/2*_width;
@@ -66,18 +66,48 @@ namespace Renderer
         return res;
     }
 
-    void Rasterize::DrawTriangles(const Model::BaseModel* model,Shader::BaseShader* shader)
+    void Rasterize::DrawModel(const Model::BaseModel* model,Shader::BaseShader* shader)
     {
-        Math::Matrix4 mat=_projection*_view*_model;
-        std::vector<Math::Vector4> screenPoints;
         std::vector<Model::Triangle> tris=model->GetTriangles();
         for (int i = 0; i < tris.size(); i++)
         {
-            Model::Triangle triangle=tris[i];
-            auto v1=mat*Math::Embed<4>(*(triangle.ver[0].position));
-            auto v2=mat*Math::Embed<4>(*(triangle.ver[1].position));
-            auto v3=mat*Math::Embed<4>(*(triangle.ver[2].position));
+            DrawTriangle(tris[i],shader);
+        }
+    }
+
+    void Rasterize::DrawTriangle(const Model::Triangle& triangle,Shader::BaseShader* shader)
+    {
+        std::vector<Math::Vector4> screenPoints;
+        Math::Matrix4 mat=_projection*_view*_model;
+        auto v1=mat*Math::Embed<4>(*(triangle.ver[0].position));
+        auto v2=mat*Math::Embed<4>(*(triangle.ver[1].position));
+        auto v3=mat*Math::Embed<4>(*(triangle.ver[2].position));
+        Point points[3]={NDC2Screen(v1[0],v1[1]),NDC2Screen(v2[0],v2[1]),NDC2Screen(v3[0],v3[1])};
+        int AABB[4]={};
+        AABBRect(points,AABB);
+        for (int x = AABB[0]; x < AABB[2]; x++)
+        {
+            for (int y = AABB[1]; y < AABB[3]; y++)
+            {
+                if (InsideTriangle(Point{x,y},points))
+                {
+                    /* code */
+                }                
+            }       
         }
         
+    }
+
+    bool InsideTriangle(const Point& point,const Point* points)
+    {
+        
+    }
+
+    void AABBRect(const Point* points,int* AABB)
+    {
+        AABB[0]=std::min(std::min(points[0].x,points[1].x),points[2].x);
+        AABB[1]=std::min(std::min(points[0].y,points[1].y),points[2].y);
+        AABB[2]=std::max(std::max(points[0].x,points[1].x),points[2].x);
+        AABB[3]=std::max(std::max(points[0].y,points[1].y),points[2].y);
     }
 } // namespace Renderer

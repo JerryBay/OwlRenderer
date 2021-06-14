@@ -8,6 +8,12 @@
 
 namespace Renderer
 {
+    struct Point
+    {
+        int x;
+        int y;
+    };
+
     class Rasterize
     {
     private:
@@ -21,12 +27,6 @@ namespace Renderer
         Math::Matrix4 _projection;
         
     public:
-        struct Point
-        {
-            int x;
-            int y;
-        };
-
         Rasterize(const int width,const int height,Camera* camera);
         ~Rasterize();
         int GetIdx(const int x,const int y) const;
@@ -38,6 +38,10 @@ namespace Renderer
         void SetView(const Math::Matrix4& view);
         void SetProjection(const Math::Matrix4& projection);
         Point NDC2Screen(const double x,const double y) const;
-        void DrawTriangles(const Model::BaseModel* model,Shader::BaseShader* shader);
+        void DrawModel(const Model::BaseModel* model,Shader::BaseShader* shader);
+        void DrawTriangle(const Model::Triangle& triangle,Shader::BaseShader* shader);
     };
+
+    bool InsideTriangle(const Point& point,const Point* points);
+    void AABBRect(Point* points,int* AABB);
 } // namespace Rasterize
